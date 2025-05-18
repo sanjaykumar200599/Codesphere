@@ -91,13 +91,13 @@ http.route({
       const name = `${first_name || ""} ${last_name || ""}`.trim();
 
       try {
-        // await ctx.runMutation(api.users.syncUser, {
-        //   userId: id,
-        //   email,
-        //   name,
-        // });
+        await ctx.runMutation(api.users.syncUser, {
+          userId: id,
+          email,
+          name,
+        });
 
-        //save user to db
+       
       } catch (error) {
         console.log("Error creating user:", error);
         return new Response("Error creating user", { status: 500 });
