@@ -5,6 +5,7 @@ import { api } from "../../../../convex/_generated/api";
 import { X } from "lucide-react";
 import toast from "react-hot-toast";
 
+
 function ShareSnippetDialog({ onClose }: { onClose: () => void }) {
   const [title, setTitle] = useState("");
   const [isSharing, setIsSharing] = useState(false);
