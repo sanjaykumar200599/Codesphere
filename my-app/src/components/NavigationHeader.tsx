@@ -1,83 +1,82 @@
-const CardSkeleton = () => (
-  <div className="relative group">
-    <div className="bg-[#1e1e2e]/80 rounded-xl border border-[#313244]/50 overflow-hidden h-[280px]">
-      <div className="p-6 space-y-4">
-        {/* Header shimmer */}
-        <div className="flex items-start justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-gray-800 animate-pulse" />
-            <div className="space-y-2">
-              <div className="w-24 h-6 bg-gray-800 rounded-lg animate-pulse" />
-              <div className="w-20 h-4 bg-gray-800 rounded-lg animate-pulse" />
-            </div>
-          </div>
-          <div className="w-16 h-8 bg-gray-800 rounded-lg animate-pulse" />
-        </div>
+import HeaderProfileBtn from "@/app/(root)/_components/HeaderProfileBtn";
+import { SignedOut } from "@clerk/nextjs";
+import { Blocks, Code2, Sparkles } from "lucide-react";
+import Link from "next/link";
 
-        {/* Title shimmer */}
-        <div className="space-y-2">
-          <div className="w-3/4 h-7 bg-gray-800 rounded-lg animate-pulse" />
-          <div className="w-1/2 h-5 bg-gray-800 rounded-lg animate-pulse" />
-        </div>
-
-        {/* Code block shimmer */}
-        <div className="space-y-2 bg-black/30 rounded-lg p-4">
-          <div className="w-full h-4 bg-gray-800 rounded animate-pulse" />
-          <div className="w-3/4 h-4 bg-gray-800 rounded animate-pulse" />
-          <div className="w-1/2 h-4 bg-gray-800 rounded animate-pulse" />
-        </div>
-      </div>
-    </div>
-  </div>
-);
-
-export default function SnippetsPageSkeleton() {
+function NavigationHeader() {
   return (
-    <div className="min-h-screen bg-[#0a0a0f]">
-      {/* Ambient background with loading pulse */}
-      <div className="fixed inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
-        <div className="absolute top-[20%] -left-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl" />
-        <div className="absolute top-[20%] -right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl" />
-      </div>
-
-      {/* Hero Section Skeleton */}
-      <div className="relative max-w-7xl mx-auto px-4 py-12">
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-6">
-          <div className="w-48 h-8 bg-gray-800 rounded-full mx-auto animate-pulse" />
-          <div className="w-96 h-12 bg-gray-800 rounded-xl mx-auto animate-pulse" />
-          <div className="w-72 h-6 bg-gray-800 rounded-lg mx-auto animate-pulse" />
-        </div>
-
-        {/* Search and Filters Skeleton */}
-        <div className="max-w-5xl mx-auto mb-12 space-y-6">
-          {/* Search bar */}
-          <div className="relative">
-            <div className="w-full h-14 bg-[#1e1e2e]/80 rounded-xl border border-[#313244] animate-pulse" />
-          </div>
-
-          {/* Language filters */}
-          <div className="flex flex-wrap gap-2">
-            {[...Array(6)].map((_, i) => (
+    <div className="sticky top-0 z-50 w-full border-b border-gray-800/50 bg-gray-950/80 backdrop-blur-xl backdrop-saturate-150">
+      <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5" />
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="relative h-16 flex items-center justify-between">
+          <div className="flex items-center gap-8">
+            {/* Logo */}
+            <Link href="/" className="flex items-center gap-3 group relative">
+              {/* logo hover effect */}
               <div
-                key={i}
-                className="w-24 h-8 bg-gray-800 rounded-lg animate-pulse"
-                style={{
-                  animationDelay: `${i * 100}ms`,
-                }}
+                className="absolute -inset-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-lg opacity-0 
+              group-hover:opacity-100 transition-all duration-500 blur-xl"
               />
-            ))}
-          </div>
-        </div>
 
-        {/* Grid Skeleton */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {[...Array(6)].map((_, i) => (
-            <div key={i}>
-              <CardSkeleton />
-            </div>
-          ))}
+              {/* Logo */}
+              <div className="relative bg-gradient-to-br from-[#1a1a2e] to-[#0a0a0f] p-2 rounded-xl ring-1 ring-white/10 group-hover:ring-white/20 transition-all">
+                <Blocks className="w-6 h-6 text-blue-400 transform -rotate-6 group-hover:rotate-0 transition-transform duration-500" />
+              </div>
+
+              <div className="relative">
+                <span
+                  className="block text-lg font-semibold bg-gradient-to-r
+                 from-blue-400 via-blue-300 to-purple-400 text-transparent bg-clip-text"
+                >
+                  CodeCraft
+                </span>
+                <span className="block text-xs text-blue-400/60 font-medium">
+                  Interactive Code Editor
+                </span>
+              </div>
+            </Link>
+
+            {/* snippets Link */}
+            <Link
+              href="/snippets"
+              className="relative group flex items-center gap-2 px-4 py-1.5 rounded-lg text-gray-300 bg-gray-800/50 hover:bg-blue-500/10 
+              border border-gray-800 hover:border-blue-500/50 transition-all duration-300 shadow-lg overflow-hidden"
+            >
+              <div
+                className="absolute inset-0 bg-gradient-to-r from-blue-500/10 
+              to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity"
+              />
+              <Code2 className="w-4 h-4 relative z-10 group-hover:rotate-3 transition-transform" />
+              <span className="text-sm font-medium relative z-10 group-hover:text-white transition-colors">
+                Snippets
+              </span>
+            </Link>
+          </div>
+
+          {/* right rection */}
+          <div className="flex items-center gap-4">
+            <SignedOut>
+              <Link
+                href="/pricing"
+                className="flex items-center gap-2 px-4 py-1.5 rounded-lg border border-amber-500/20
+                 hover:border-amber-500/40 bg-gradient-to-r from-amber-500/10 
+                to-orange-500/10 hover:from-amber-500/20 hover:to-orange-500/20 transition-all 
+                duration-300"
+              >
+                <Sparkles className="w-4 h-4 text-amber-400 hover:text-amber-300" />
+                <span className="text-sm font-medium text-amber-400/90 hover:text-amber-300">
+                  Pro
+                </span>
+              </Link>
+            </SignedOut>
+
+            {/* profile button */}
+            <HeaderProfileBtn />
+          </div>
         </div>
       </div>
     </div>
   );
 }
+
+export default NavigationHeader;
