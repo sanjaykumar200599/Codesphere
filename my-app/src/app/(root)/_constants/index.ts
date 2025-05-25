@@ -1,6 +1,5 @@
-import { Monaco } from "@monaco-editor/react";
 import { Theme } from "../../../types";
-// import * as monacoEditor from "monaco-editor";
+import * as monacoEditor from "monaco-editor";
 
 
 type LanguageConfig = Record<
@@ -421,25 +420,12 @@ export const THEME_DEFINITONS = {
   },
 };
 
-// Helper function to define themes in Monaco
-// export const defineMonacoThemes = (monaco: Monaco) => {
-//   Object.entries(THEME_DEFINITONS).forEach(([themeName, themeData]) => {
-//     (monaco as any).editor.defineTheme(themeName, {
-//       base: themeData.base,
-//       inherit: themeData.inherit,
-//       rules: themeData.rules.map((rule) => ({
-//         ...rule,
-//         foreground: rule.foreground,
-//       })),
-//       colors: themeData.colors,
-//     });
-//   });
-// };
-export const defineMonacoThemes = (monaco:Monaco) => {
+//Helper function to define themes in Monaco
+export const defineMonacoThemes = (monaco:typeof monacoEditor) => {
   Object.entries(THEME_DEFINITONS).forEach(([themeName, themeData]) => {
-    monaco.editor.defineTheme(themeName, {
-      base: themeData.base,
-      inherit: themeData.inherit,
+    (monaco).editor.defineTheme(themeName, {
+    base: themeData.base as monacoEditor.editor.BuiltinTheme,
+    inherit: themeData.inherit,
       rules: themeData.rules.map((rule) => ({
         ...rule,
         foreground: rule.foreground,
@@ -448,3 +434,4 @@ export const defineMonacoThemes = (monaco:Monaco) => {
     });
   });
 };
+
